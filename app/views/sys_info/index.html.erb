@@ -1,0 +1,14 @@
+<p>RAILS_ROOT  : <%= File.expand_path RAILS_ROOT  %></p>
+<% if mongrel_pid = `cat #{RAILS_ROOT}/log/mongrel.pid` %>	
+	<p>Mongrel pid : <%= mongrel_pid %></p>
+<% end %>
+<% if @svn_info %>
+	<p>current_info: <pre><%= @svn_info[:current_info].inspect %> </pre></p>
+	<p>remote_info : <pre><%= @svn_info[:remote_info].inspect %> </pre></p>
+	<p><%= link_to "Svn Up", {:action => "svn_up"}, :confirm => "Are you sure?" %></p>	
+<% end %>
+
+<% if(notice = flash[:notice]) %>
+	<%= h notice %>
+<% end %>
+<%= link_to "reboot", {:action => "reboot"}, :confirm => "Are you sure?"  %>
